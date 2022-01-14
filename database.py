@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import ImageTk, Image
 import sqlite3
+from tkinter import ttk
 
 root = Tk()
 root.title("Databases")
@@ -72,13 +73,46 @@ def query():
     cursor.execute("SELECT *, oid FROM addresses")
     records = cursor.fetchall()
     #print(records)
+    
+    showWindow = Toplevel()
+    showWindow.title("Show Records")
+    showWindow.geometry('1000x400')
+
+    set = ttk.Treeview(showWindow)
+    set.pack()
+
+    set['columns']= ('id', 'firstName','lastName', 'address', 'city', 'state', 'zipcode')
+    set.column("#0", width=0,  stretch=NO)
+    set.column("id",anchor=CENTER, width=100)
+    set.column("firstName",anchor=CENTER, width=100)
+    set.column("lastName",anchor=CENTER, width=100)
+    set.column("address",anchor=CENTER, width=200)
+    set.column("city",anchor=CENTER, width=100)
+    set.column("state",anchor=CENTER, width=100)
+    set.column("zipcode",anchor=CENTER, width=100)
+
+    set.heading("#0",text="",anchor=CENTER)
+    set.heading("id",text="ID",anchor=CENTER)
+    set.heading("firstName",text="First Name",anchor=CENTER)
+    set.heading("lastName",text="Last Name",anchor=CENTER)
+    set.heading("address",text="Address",anchor=CENTER)
+    set.heading("city",text="City",anchor=CENTER)
+    set.heading("state",text="State",anchor=CENTER)
+    set.heading("zipcode",text="Zipcode",anchor=CENTER)
+
+
 
     printRecords = ''
     for rec in records:
-        printRecords += str(rec[0]) + ' ' + str(rec[1]) + '\t' + str(rec[6]) + '\n'
+        #printRecords += str(rec[0]) + ' ' + str(rec[1]) + ' ' + str(rec[2]) + ' ' + str(rec[6]) + '\n'
+        set.insert(parent='',index='end',text='',
+        values=(str(rec[6]), str(rec[0]), str(rec[1]), str(rec[2]), str(rec[3]), str(rec[4]), str(rec[5])))
 
-    queryLabel = Label(root, text=printRecords)
-    queryLabel.grid(row=12, column=0, columnspan=2)
+
+    
+
+    '''queryLabel = Label(showWindow, text=printRecords)
+    queryLabel.grid(row=1, column=0)'''
 
 
     # Commit changes
@@ -86,6 +120,7 @@ def query():
 
     # Close  connection
     conn.close()
+
 
 # Create a function to Delete data from database
 def delete():
@@ -107,7 +142,7 @@ def delete():
 # Create a function to Update a record
 def edit():
     global editor
-    editor = Tk()
+    editor = Toplevel()
     editor.title("Editor")
     editor.geometry('400x400')
 
@@ -252,19 +287,19 @@ deleteBoxl.grid(row=9, column=0, pady=5)
 
 # Create Sumbit Button
 submitBtn = Button(root, text="Add Record to Database", command=submit)
-submitBtn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+submitBtn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
 # Create a Query Button
 queryBtn = Button(root, text="Show Records", command=query)
-queryBtn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=127)
+queryBtn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=146)
 
 # Create a Delete Button
 deleteBtn = Button(root, text="Delete Record", command=delete)
-deleteBtn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=129)
+deleteBtn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=147)
 
 # Create an Update Button
 editBtn = Button(root, text="Edit Record", command=edit)
-editBtn.grid(row=11, column=0, columnspan=2, pady=10, padx=10, ipadx=136)
+editBtn.grid(row=11, column=0, columnspan=2, pady=10, padx=10, ipadx=154)
 
 
 
