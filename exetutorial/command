@@ -1,0 +1,12 @@
+pip install pyinstaller
+
+
+With ico:
+    pyinstaller.exe --onefile --icon=codemy.ico -w entryHeight.py
+No ico:
+    pyinstaller.exe --onefile -w entryHeight.py
+
+
+If not icon, just remove that part of the command
+Can delete all other files that come loaded in with the executable file
+All you need is the executable file for this to work
