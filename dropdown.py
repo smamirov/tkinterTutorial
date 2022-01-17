@@ -7,7 +7,8 @@ root.geometry('400x400')
 
 def show(var):
     picked = Label(root, text=clicked.get()).pack()
-
+    
+    
 options= [
     "Monday", 
     "Tuesday", 

@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import ImageTk, Image
 
 root = Tk()
-root.title("Checkboxes")
+root.title("")
 root.geometry('400x400')
 
 
@@ -11,7 +11,27 @@ root.mainloop()
 
 
 ######################################################
-# Use Tkinter for python 2, tkinter for python 3
+# Method 1
+from tkinter import *
+
+class Login(Tk):
+    def __init__(self):
+        super().__init__()
+        self.geometry("700x500")
+        self.resizable(False, False)
+
+    def label(self):
+        self.myLabel = Label(self, text="Hello World!")
+        self.myLabel.pack()
+
+if __name__=="__main__":
+    root = Login()
+    root.label()
+    root.mainloop()
+
+#######################################################
+# Methid 2
+
 import tkinter as tk
 
 class MainApplication(tk.Frame):
