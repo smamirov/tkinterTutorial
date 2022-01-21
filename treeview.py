@@ -1,4 +1,5 @@
 from operator import index
+from re import M
 from tkinter import *
 from tkinter import ttk
 from unicodedata import name
@@ -96,10 +97,12 @@ def removeAll():
 
 def removeOne():
     x = myTree.selection()[0]
+    print(x)
     myTree.delete(x)
 
 def removeMany():
     x = myTree.selection()
+    print(x)
     for record in x:
         myTree.delete(record)
 

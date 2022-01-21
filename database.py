@@ -146,7 +146,7 @@ def edit():
     editor.title("Editor")
     editor.geometry('400x400')
 
-    # Create or connect to a database=
+    # Create or connect to a database
     conn = sqlite3.connect('addressBook.db')
 
     # Create a cursor
